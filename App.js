@@ -1,41 +1,33 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import axios from 'axios';
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import Header from './src/components/Header';
-import PeopleList from './src/components/PeopleList';
+import PeoplePage from "./src/screens/PeoplePage";
+import PersonDetail from "./src/screens/PersonDetail";
 
-type Props = {};
-export default class App extends Component<Props> {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            people: []
-        };
+const StackNavigator = createStackNavigator({
+    'Main': {
+        screen: PeoplePage
+    },
+    'PersonDetail': {
+        screen: PersonDetail
     }
+}, {
+    defaultNavigationOptions: {
+        title: 'Contatos',
+        headerTitleStyle: {
+            color: 'white',
+            fontSize: 30,
+            flexGrow: 1,
+            textAlign: 'center'
+        },
+        headerStyle: {
+            backgroundColor: '#6ca2f7',
+            borderBottomWidth: 1,
+            borderBottomColor: '#C5C5C5'
+        }
 
-    componentDidMount(): void {
-        axios
-            .get('https://randomuser.me/api?nat=br&results=5')
-            .then(res => {
-                const {results} = res.data;
-                this.setState({people: results});
-            });
     }
+});
 
-    renderList() {
-        return this.state.people.map(person => <Text key={person.name.first}>{person.name.first}</Text>);
-    }
+const AppContainer = createAppContainer(StackNavigator);
 
-    render() {
-        return (
-            <View>
-                <Header label={'Contatos'}/>
-                <PeopleList people={this.state.people} />
-                {/*{this.renderList()}*/}
-            </View>
-        );
-    }
-}
+export default AppContainer;
