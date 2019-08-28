@@ -9,7 +9,9 @@ const PeopleListItem = props => {
     const {thumbnail} = person.picture;
 
     return (
-        <TouchableOpacity onPress={onPressItem}>
+        <TouchableOpacity onPress={() => {
+            onPressItem({person});
+        }}>
             <View style={styles.line}>
                 <Image source={{uri: thumbnail}} style={styles.avatar}/>
                 <Text style={styles.lineText}>

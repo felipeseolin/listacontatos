@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 
 import PeopleListItem from "./PeopleListItem";
 
@@ -15,9 +15,9 @@ const PeopleList = (props) => {
     });
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             {items}
-        </View>
+        </ScrollView>
     );
 };
 

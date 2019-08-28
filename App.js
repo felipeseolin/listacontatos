@@ -2,13 +2,24 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import PeoplePage from "./src/screens/PeoplePage";
 import PersonDetail from "./src/screens/PersonDetail";
+import capitalizeFirstLetter from "./src/util/capitalizeFirstLetter";
 
 const StackNavigator = createStackNavigator({
     'Main': {
         screen: PeoplePage
     },
     'PersonDetail': {
-        screen: PersonDetail
+        screen: PersonDetail,
+        navigationOptions: ({navigation}) => {
+            const personName = capitalizeFirstLetter(navigation.state.params.person.name.first);
+            return({
+                title: personName,
+                headerTitleStyle: {
+                    color: 'white',
+                    fontSize: 30,
+                }
+            })
+        }
     }
 }, {
     defaultNavigationOptions: {
